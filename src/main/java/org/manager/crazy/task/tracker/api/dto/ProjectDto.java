@@ -2,6 +2,7 @@ package org.manager.crazy.task.tracker.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.Instant;
 
@@ -9,15 +10,20 @@ import java.time.Instant;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProjectDto {
 
     @NonNull
-    private Long id;
+    Long id;
 
     @NonNull
-    private String name;
+    String name;
 
     @NonNull
     @JsonProperty("created_at")
-    private Instant createdAt;
+    Instant createdAt;
+
+    @NonNull
+    @JsonProperty("updated_at")
+    Instant updatedAt;
 }

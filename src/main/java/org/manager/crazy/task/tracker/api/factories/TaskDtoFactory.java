@@ -14,9 +14,8 @@ public class TaskDtoFactory {
         return TaskDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())
-                .description(entity.getDescription())
                 .createdAt(entity.getCreatedAt())
+                .description(entity.getDescription())
                 .build();
-
     }
 }

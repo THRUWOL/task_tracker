@@ -1,6 +1,7 @@
 package org.manager.crazy.task.tracker.store.entities;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -9,25 +10,29 @@ import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "project")
 public class ProjectEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    Long id;
 
     @Column(unique = true)
-    private String name;
+    String name;
 
     @Builder.Default
-    private Instant createdAt = Instant.now();
+    Instant updatedAt = Instant.now();
+
+    @Builder.Default
+    Instant createdAt = Instant.now();
 
     @Builder.Default
     @OneToMany
-    @JoinColumn(name = "project_id", referencedColumnName = "id")
-    private List<TaskStateEntity> taskStates = new ArrayList<>();
+    @JoinColumn(name = "project_id")
+    List<TaskStateEntity> taskStates = new ArrayList<>();
 }
